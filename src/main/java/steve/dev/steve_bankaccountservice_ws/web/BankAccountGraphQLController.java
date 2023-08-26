@@ -1,6 +1,7 @@
 package steve.dev.steve_bankaccountservice_ws.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 import steve.dev.steve_bankaccountservice_ws.entities.BankAccount;
@@ -14,7 +15,12 @@ public class BankAccountGraphQLController {
     private BankAccountRepository bankAccountRepository;
 
     @QueryMapping
-    public List<BankAccount> accountList(){
+    public List<BankAccount> accountsList(){
         return bankAccountRepository.findAll();
+    }
+    @QueryMapping
+    public BankAccount bankAccountById(@Argument String id){
+        return bankAccountRepository.findById(id)
+                .orElseThrow(()->new RuntimeException(String.format("Account %s not found",id)));
     }
 }
