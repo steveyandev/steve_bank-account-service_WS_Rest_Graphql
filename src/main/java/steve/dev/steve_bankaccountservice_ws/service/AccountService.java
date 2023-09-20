@@ -6,4 +6,6 @@ import steve.dev.steve_bankaccountservice_ws.entities.BankAccount;
 
 public interface AccountService {
     public BankAccountResponseDTO addAccount(BankAccountRequestDTO bankAccountDTO);
+
+    BankAccountResponseDTO updateAccount(String id, BankAccountRequestDTO bankAccountDTO);
 }
