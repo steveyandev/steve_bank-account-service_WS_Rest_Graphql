@@ -1,5 +1,6 @@
 package steve.dev.steve_bankaccountservice_ws.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,5 +16,6 @@ public class Customer {
     private Long id;
     private String name;
     @OneToMany(mappedBy ="customer")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<BankAccount> bankAccounts;
 }
