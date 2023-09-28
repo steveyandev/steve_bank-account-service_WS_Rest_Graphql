@@ -11,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import steve.dev.steve_bankaccountservice_ws.dto.BankAccountRequestDTO;
 import steve.dev.steve_bankaccountservice_ws.dto.BankAccountResponseDTO;
 import steve.dev.steve_bankaccountservice_ws.entities.BankAccount;
+import steve.dev.steve_bankaccountservice_ws.entities.Customer;
 import steve.dev.steve_bankaccountservice_ws.repositories.BankAccountRepository;
+import steve.dev.steve_bankaccountservice_ws.repositories.CustomerRepository;
 import steve.dev.steve_bankaccountservice_ws.service.AccountService;
 
 import java.util.List;
@@ -22,6 +24,8 @@ public class BankAccountGraphQLController {
     private BankAccountRepository bankAccountRepository;
     @Autowired
     private AccountService accountService;
+    @Autowired
+    private CustomerRepository customerRepository;
     @QueryMapping
     public List<BankAccount> accountsList(){
         return bankAccountRepository.findAll();
@@ -43,6 +47,10 @@ public class BankAccountGraphQLController {
     public Boolean deleteAccount(@Argument String id){
         bankAccountRepository.deleteById(id);
         return true;
+    }
+    @QueryMapping
+    public List<Customer> customers(){
+       return customerRepository.findAll();
     }
 }
 
